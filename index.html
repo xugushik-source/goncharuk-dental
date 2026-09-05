@@ -88,8 +88,17 @@
   .route-link:hover{border-color:var(--gold); color:var(--gold);}
 
   .svc-check-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px;}
-  .svc-check{display:flex; align-items:center; gap:8px; border:1.5px solid #E1E8E0; border-radius:10px; padding:10px 10px; background:#FBFCFA; font-size:13.5px; font-weight:600; color:var(--ink);}
+  .svc-check{display:flex; align-items:center; justify-content:space-between; gap:8px; border:1.5px solid #E1E8E0; border-radius:10px; padding:10px 10px; background:#FBFCFA; font-size:13.5px; font-weight:600; color:var(--ink);}
+  .svc-check-left{display:flex; align-items:center; gap:8px;}
   .svc-check input{width:18px; height:18px; accent-color:var(--teal); margin:0; flex:0 0 auto;}
+  .svc-check .p{font-size:12px; color:var(--muted); font-weight:700; white-space:nowrap;}
+
+  .calc-card{background:var(--teal); border-radius:var(--radius); padding:18px; color:#fff; margin-bottom:16px;}
+  .calc-row{display:flex; justify-content:space-between; align-items:center; padding:6px 0; font-size:14px;}
+  .calc-row.total{border-top:1px solid rgba(255,255,255,.18); margin-top:6px; padding-top:12px; font-size:17px; font-weight:700;}
+  .calc-row .muted{color:rgba(255,255,255,.65);}
+  .discount-pill{display:inline-block; background:var(--gold); color:#fff; font-size:12px; font-weight:700; padding:3px 10px; border-radius:20px; margin-left:8px;}
+  .calc-tiers{font-size:12px; color:rgba(255,255,255,.65); margin-top:12px; line-height:1.6;}
 
   .price-list{background:var(--surface); border-radius:var(--radius); overflow:hidden; box-shadow:0 1px 3px rgba(30,61,54,.08);}
   .price-row{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid #EEF2EC; gap:14px;}
@@ -243,23 +252,34 @@
       <div id="slotsBox"><div class="empty-note" data-i18n="en">Loading available times…</div><div class="empty-note" data-i18n="es">Cargando horarios disponibles…</div></div>
     </div>
 
-    <div id="step-form" class="card hidden">
+    <div id="step-form" class="card">
       <p style="font-size:13px;color:var(--muted);margin:-4px 0 14px;">
         <span data-i18n="en">Selected time:</span><span data-i18n="es">Hora seleccionada:</span>
-        <b id="chosenSlot"></b>
+        <b id="chosenSlot">—</b>
       </p>
       <label data-i18n="en">What do you need? (optional)</label>
       <label data-i18n="es">¿Qué necesita? (opcional)</label>
       <div class="svc-check-grid">
-        <label class="svc-check"><input type="checkbox" class="svcbox" value="Cleaning" data-es="Limpieza"><span data-i18n="en">Cleaning</span><span data-i18n="es">Limpieza</span></label>
-        <label class="svc-check"><input type="checkbox" class="svcbox" value="Filling" data-es="Empaste"><span data-i18n="en">Filling</span><span data-i18n="es">Empaste</span></label>
-        <label class="svc-check"><input type="checkbox" class="svcbox" value="Crown" data-es="Corona"><span data-i18n="en">Crown</span><span data-i18n="es">Corona</span></label>
-        <label class="svc-check"><input type="checkbox" class="svcbox" value="Root Canal" data-es="Conducto"><span data-i18n="en">Root Canal</span><span data-i18n="es">Conducto</span></label>
-        <label class="svc-check"><input type="checkbox" class="svcbox" value="Extraction" data-es="Extracción"><span data-i18n="en">Extraction</span><span data-i18n="es">Extracción</span></label>
-        <label class="svc-check"><input type="checkbox" class="svcbox" value="Veneers" data-es="Carillas"><span data-i18n="en">Veneers</span><span data-i18n="es">Carillas</span></label>
-        <label class="svc-check"><input type="checkbox" class="svcbox" value="Emergency" data-es="Emergencia"><span data-i18n="en">Emergency</span><span data-i18n="es">Emergencia</span></label>
-        <label class="svc-check"><input type="checkbox" class="svcbox" value="Other" data-es="Otro"><span data-i18n="en">Other</span><span data-i18n="es">Otro</span></label>
+        <label class="svc-check"><span class="svc-check-left"><input type="checkbox" class="svcbox" value="Cleaning" data-es="Limpieza" data-price="125"><span data-i18n="en">Cleaning</span><span data-i18n="es">Limpieza</span></span><span class="p">$125</span></label>
+        <label class="svc-check"><span class="svc-check-left"><input type="checkbox" class="svcbox" value="Filling" data-es="Empaste" data-price="150"><span data-i18n="en">Filling</span><span data-i18n="es">Empaste</span></span><span class="p">$150</span></label>
+        <label class="svc-check"><span class="svc-check-left"><input type="checkbox" class="svcbox" value="Crown" data-es="Corona" data-price="900"><span data-i18n="en">Crown</span><span data-i18n="es">Corona</span></span><span class="p">$900</span></label>
+        <label class="svc-check"><span class="svc-check-left"><input type="checkbox" class="svcbox" value="Root Canal" data-es="Conducto" data-price="700"><span data-i18n="en">Root Canal</span><span data-i18n="es">Conducto</span></span><span class="p">$700</span></label>
+        <label class="svc-check"><span class="svc-check-left"><input type="checkbox" class="svcbox" value="Extraction" data-es="Extracción" data-price="150"><span data-i18n="en">Extraction</span><span data-i18n="es">Extracción</span></span><span class="p">$150</span></label>
+        <label class="svc-check"><span class="svc-check-left"><input type="checkbox" class="svcbox" value="Veneers" data-es="Carillas" data-price="900"><span data-i18n="en">Veneers</span><span data-i18n="es">Carillas</span></span><span class="p">$900</span></label>
+        <label class="svc-check"><span class="svc-check-left"><input type="checkbox" class="svcbox" value="Emergency" data-es="Emergencia" data-price="95"><span data-i18n="en">Emergency</span><span data-i18n="es">Emergencia</span></span><span class="p">$95</span></label>
+        <label class="svc-check"><span class="svc-check-left"><input type="checkbox" class="svcbox" value="Other" data-es="Otro" data-price="0"><span data-i18n="en">Other</span><span data-i18n="es">Otro</span></span><span class="p"></span></label>
       </div>
+
+      <div class="calc-card" id="calcCard" style="display:none;">
+        <div class="calc-row"><span class="muted" data-i18n="en">Subtotal</span><span class="muted" data-i18n="es">Subtotal</span><span id="calcSubtotal">$0</span></div>
+        <div class="calc-row total">
+          <span data-i18n="en">Estimated Total</span><span data-i18n="es">Total Estimado</span>
+          <span id="calcTotal">$0<span class="discount-pill hidden" id="discountPill"></span></span>
+        </div>
+        <div class="calc-tiers" data-i18n="en">Estimate only, not a final price. Discounts: 5% off $500+, 10% off $1,000+, 15% off $1,500+. Final cost confirmed by our office based on your exam and insurance.</div>
+        <div class="calc-tiers" data-i18n="es">Solo un estimado, no un precio final. Descuentos: 5% desde $500, 10% desde $1,000, 15% desde $1,500. El costo final se confirma según su examen y seguro.</div>
+      </div>
+
       <label data-i18n="en">First &amp; Last Name</label>
       <label data-i18n="es">Nombre y Apellido</label>
       <input type="text" id="name">
@@ -308,6 +328,7 @@
 <script>
   // ── EDIT THESE BEFORE PUBLISHING ─────────────────────────────
   const BOOKING_API_URL = 'https://script.google.com/macros/s/AKfycbx2ReNKmGqVXhchOD0znn7oneQGBZi5y4q-6sUkSrH3eHcBtvvu05uMf8ntjnDZLR_1/exec';
+  const CLINIC_WHATSAPP = 'ВСТАВЬ_СЮДА_НОМЕР'; // e.g. '995591XXXXXX' — digits only, no + or spaces
   // ─────────────────────────────────────────────────────────────
 
   let currentLang = 'en';
@@ -317,6 +338,7 @@
       loading: 'Loading available times…', loadError: 'Could not load times. Please call us instead.',
       noSlots: 'No times available for this date. Please choose another date or call us.',
       fillRequired: 'Please fill in your name and phone number.',
+      pickTime: 'Please select an available time above.',
       booking: 'Sending…', bookErr: 'Something went wrong. Please call us instead.',
       notConnected: 'Online booking is not connected yet — please call the office.',
       connErr: 'Could not reach the booking system. Please call us instead.',
@@ -326,6 +348,7 @@
       loading: 'Cargando horarios disponibles…', loadError: 'No se pudieron cargar los horarios. Llámenos.',
       noSlots: 'No hay horarios disponibles para esta fecha. Elija otra fecha o llámenos.',
       fillRequired: 'Por favor complete su nombre y número de teléfono.',
+      pickTime: 'Por favor seleccione un horario disponible arriba.',
       booking: 'Enviando…', bookErr: 'Algo salió mal. Por favor llámenos.',
       notConnected: 'La reserva en línea aún no está conectada — por favor llame al consultorio.',
       connErr: 'No se pudo conectar con el sistema de reservas. Por favor llámenos.',
@@ -340,6 +363,43 @@
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.setlang === lang));
   }
   document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.setlang)));
+
+  const DISCOUNT_TIERS = [
+    { min: 1500, rate: 0.15 },
+    { min: 1000, rate: 0.10 },
+    { min: 500,  rate: 0.05 }
+  ];
+
+  const calcCard = document.getElementById('calcCard');
+  const calcSubtotal = document.getElementById('calcSubtotal');
+  const calcTotal = document.getElementById('calcTotal');
+  const discountPill = document.getElementById('discountPill');
+
+  function getSelectedServices() {
+    return Array.from(document.querySelectorAll('.svcbox:checked')).map(el => ({
+      name: currentLang === 'es' ? el.dataset.es : el.value,
+      price: Number(el.dataset.price || 0)
+    }));
+  }
+
+  function recalcCart() {
+    const chosen = getSelectedServices();
+    if (!chosen.length) { calcCard.style.display = 'none'; return; }
+    calcCard.style.display = 'block';
+    const subtotal = chosen.reduce((sum, s) => sum + s.price, 0);
+    const tier = DISCOUNT_TIERS.find(t => subtotal >= t.min);
+    const discount = tier ? Math.round(subtotal * tier.rate) : 0;
+    const total = subtotal - discount;
+    calcSubtotal.textContent = '$' + subtotal;
+    calcTotal.firstChild.textContent = '$' + total + ' ';
+    if (tier) {
+      discountPill.textContent = '-' + Math.round(tier.rate * 100) + '%';
+      discountPill.classList.remove('hidden');
+    } else {
+      discountPill.classList.add('hidden');
+    }
+  }
+  document.querySelectorAll('.svcbox').forEach(el => el.addEventListener('change', recalcCart));
 
   const dateInput = document.getElementById('date');
   const slotsBox = document.getElementById('slotsBox');
@@ -403,7 +463,6 @@
   function loadSlots() {
     selectedDate = dateInput.value;
     selectedTime = null;
-    stepForm.classList.add('hidden');
     slotsBox.innerHTML = '<div class="empty-note">' + T[currentLang].loading + '</div>';
     jsonpCall({ action: 'slots', date: selectedDate }).then(res => {
       if (!res.success) { slotsBox.innerHTML = '<div class="empty-note">' + (res.error || T[currentLang].loadError) + '</div>'; return; }
@@ -426,7 +485,6 @@
     el.classList.add('selected');
     selectedTime = el.dataset.time;
     chosenSlotEl.textContent = formatDate(selectedDate) + ', ' + selectedTime;
-    stepForm.classList.remove('hidden');
     stepForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -439,10 +497,17 @@
     const name = document.getElementById('name').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const message = document.getElementById('message').value.trim();
-    const services = Array.from(document.querySelectorAll('.svcbox:checked'))
-      .map(el => currentLang === 'es' ? el.dataset.es : el.value)
-      .join(', ');
+    const chosen = getSelectedServices();
+    const services = chosen.map(s => s.name).join(', ');
+    const subtotal = chosen.reduce((sum, s) => sum + s.price, 0);
+    const tier = DISCOUNT_TIERS.find(t => subtotal >= t.min);
+    const total = subtotal - (tier ? Math.round(subtotal * tier.rate) : 0);
 
+    if (!selectedTime) {
+      formError.textContent = T[currentLang].pickTime;
+      formError.style.display = 'block';
+      return;
+    }
     if (!name || !phone) {
       formError.textContent = T[currentLang].fillRequired;
       formError.style.display = 'block';
@@ -468,6 +533,18 @@
       stepForm.classList.add('hidden');
       stepConfirm.classList.remove('hidden');
       document.getElementById('confirmText').textContent = T[currentLang].confirmed(formatDate(selectedDate), selectedTime);
+
+      if (CLINIC_WHATSAPP && CLINIC_WHATSAPP.indexOf('ВСТАВЬ_СЮДА') === -1) {
+        let waText = (currentLang === 'es' ? 'Nueva solicitud de cita — Ocean-Side Dental' : 'New appointment request — Ocean-Side Dental') + '\n' +
+          (currentLang === 'es' ? 'Nombre' : 'Name') + ': ' + name + '\n' +
+          (currentLang === 'es' ? 'Teléfono' : 'Phone') + ': ' + phone + '\n' +
+          (currentLang === 'es' ? 'Fecha y hora' : 'Date & time') + ': ' + formatDate(selectedDate) + ', ' + selectedTime;
+        if (services) waText += '\n' + (currentLang === 'es' ? 'Servicios' : 'Services') + ': ' + services;
+        if (subtotal > 0) waText += '\n' + (currentLang === 'es' ? 'Total estimado' : 'Estimated total') + ': $' + total;
+        if (message) waText += '\n' + (currentLang === 'es' ? 'Nota' : 'Note') + ': ' + message;
+        const waLink = 'https://wa.me/' + CLINIC_WHATSAPP + '?text=' + encodeURIComponent(waText);
+        setTimeout(function () { window.location.href = waLink; }, 1200);
+      }
     });
   });
 
